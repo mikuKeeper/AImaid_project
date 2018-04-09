@@ -16,7 +16,7 @@ else:
 def maidthread():
     M2 = MaidM()
     child = subprocess.Popen(['python3','maid.py'])
-    time.sleep(15)
+    time.sleep(1800)
     while True:
         if M2.getBusy() == False:
             child.kill()
