@@ -4,11 +4,6 @@ import subprocess
 import time
 import sqlite3
 from AImaid.core.model.main.model_maid import MaidM
-#from common_unit.my_redis import *
-#r = MyRedis()
-#rcon = r.connect()
-#maidbusykey = 'bilibili:danmumaid:isbusy'
-#rcon.set(maidbusykey,False)
 M = MaidM()
 if M.setBusy(False):
     print('initial status successfully')
@@ -16,8 +11,6 @@ else:
     print('initial status failed')
     print('maid stop')
     exit()
-
-fb = open('/dev/null')
 
 def maidthread():
     child = subprocess.Popen(['python3','maid.py'])
