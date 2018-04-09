@@ -1,4 +1,5 @@
 import threading
+import sys
 import os
 import subprocess
 import time
@@ -13,10 +14,11 @@ else:
     exit()
 
 def maidthread():
+    M2 = MaidM()
     child = subprocess.Popen(['python3','maid.py'])
-    time.sleep(1800)
+    time.sleep(15)
     while True:
-        if rcon.get(maidbusykey).decode('utf8') == 'False':
+        if M2.getBusy() == False:
             child.kill()
             sys.exit()
         time.sleep(1)

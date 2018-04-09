@@ -34,8 +34,7 @@ class MaidM():
             print('get busy failed :', e)
             return True
         else:
-            result = cursor.fetchall()[0][0].capitalize()
-            print(result)
+            result = cursor.fetchall()[0][0]
             if result == "False":
                 return False
             else:
