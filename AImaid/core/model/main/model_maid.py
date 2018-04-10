@@ -1,11 +1,13 @@
-import sqlite3
+import sqlite3, os
 from .model_message_queue import MessageQueueM
 
 
 class MaidM():
     def __init__(self, conn=None):
+        workpath = os.path.dirname(os.path.abspath(__file__))
+        dbpath = os.path.join(workpath,'../maid.db')
         if conn == None:
-            self.conn = sqlite3.connect('AImaid/core/model/maid.db')
+            self.conn = sqlite3.connect(dbpath)
         else:
             self.conn = conn
         self.c = self.conn.cursor()

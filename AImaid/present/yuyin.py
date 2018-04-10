@@ -1,10 +1,12 @@
 import requests
 import pygame
-import subprocess
+import subprocess, os
 from ..core.model.main.model_maid import MaidM
 
 class BaiduYuyin(): 
     def __init__(self):
+        workpath = os.path.dirname(os.path.abspath(__file__))
+        self.voicepath = os.path.join(workpath,'./tmp')
         self.apikey = 'Hc0nybVln8WrL96O6cZkXggn'
         self.secretkey = 'd1a0fd4ad85d7c69752636330fda71a5'
         self.authurl = 'https://openapi.baidu.com/oauth/2.0/token?'
@@ -40,20 +42,20 @@ class BaiduYuyin():
                 continue
             else:
                 break
-        fb = open('tmp/voice.mp3','wb')
+        fb = open(self.voicepath + '/voice.mp3','wb')
         fb.write(res.content)
         fb.close()
 
     def playMp3(self):
         try:
             fb = open('/dev/null','r')
-            child = subprocess.Popen(['ffmpeg','-y', '-i', 'tmp/voice.mp3','tmp/voice.wav'],stdout=fb, stderr=fb)
+            child = subprocess.Popen(['ffmpeg','-y', '-i', self.voicepath + '/voice.mp3', self.voicepath + '/voice.wav'],stdout=fb, stderr=fb)
             fb.close()
             child.wait()
         except Exception as e:
             print(e)
         else:
-            psound = pygame.mixer.Sound('tmp/voice.wav')
+            psound = pygame.mixer.Sound(self.voicepath + '/voice.wav')
             try:
                 psound.play()
                 psound.set_volume(1)
