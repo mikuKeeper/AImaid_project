@@ -14,3 +14,5 @@ python3.6 maid_input.py
 python3.6 maid_actions.py
 
 
+info:
+its sameple now
