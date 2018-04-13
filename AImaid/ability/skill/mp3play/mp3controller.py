@@ -24,5 +24,41 @@ class MP3Controller():
     def switch(self):
         self.M.setDefaultBGMSwitchFlag(True)
 
+    def action(self, data):
+        print(data['user']+': '+data['text'])
+        cmd = data['cmd']
+        operation = None
+        retmsg = None
+        if cmd == 'switch':
+            self.switch()
+            operation = None
+            retmsg = None
+        elif cmd == 'search':
+            self.songlist = self.search(data['songname'])
+            if self.songlist == None:
+                retmsg = '抱歉喵，未找到你点播的歌曲'
+                operation = 'talk'
+            else:
+                retmsg = '已完成搜索，请从列表中选择: '
+                strlist = ''
+                for i, song in enumerate(self.songlist):
+                    strlist = strlist + str(i) + '.' + song['singer'] + '_' + song['name'][0:10] + ';'
+                retmsg = retmsg + strlist
+                operation = None
+        elif cmd == 'select' and self.songlist != [] and self.songlist != None:
+            selectnum = int(data['selectnum'])
+            if selectnum < 0 or selectnum >= self.songlist.__len__():
+                selectnum = 0
+            song = self.songlist[selectnum]
+            flag = self.dianboPlay(song)
+            if flag == True:
+                retmsg = data['user'] + ',' + '点播' + song['singer'] + '的' + song['name'][0:10] + ' 成功'
+                operation = 'talk'
+            else:
+                retmsg = '对不起，' + data['user'] + ',' + '点播' + song['singer'] + '的' + song['name'][0:10] + ' 失败'
+                operation = 'talk'
+
+        return (operation, retmsg)
+
 
 
