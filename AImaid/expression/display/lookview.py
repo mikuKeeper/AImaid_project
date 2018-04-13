@@ -3,16 +3,21 @@ import time
 import threading
 import os 
 import queue
-import sys
+import sys, platform
 class Display():
     def __init__(self,position='middle'):
         #right_bottom
         #wpositionx = 3600
         #wpositiony = 700
         #middle
+        if platform.architecture()[1] != 'WindowsPE':
+            self.position = {'middle':'2600,500', 'right_bottom':'4200,1200'}
+        else:
+            self.position = {'middle':'2600,500', 'right_bottom':'4200,1100'}
+
         self.current_path = os.path.dirname(os.path.abspath(__file__))
         img_path = os.path.join(self.current_path,'..','..','resource','img','Animation')
-        self.position = {'middle':'2600,500', 'right_bottom':'4200,1200'}
+       
         self.action_queue = queue.Queue()
         os.environ['SDL_VIDEO_WINDOW_POS'] = self.position[position]
         talk_frames = []

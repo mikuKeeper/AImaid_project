@@ -2,6 +2,7 @@ import requests
 import pygame
 import subprocess, os
 from ...core.model.main.model_maid import MaidM
+import platform
 
 class BaiduYuyin(): 
     def __init__(self):
@@ -15,6 +16,12 @@ class BaiduYuyin():
         self.token = self.fetchToken()
         self.chunk = 1024
         pygame.mixer.init(frequency=16000)
+        if platform.architecture()[1] == 'WindowsPE':
+            self.null = 'nul'
+            self.ffmpeg = 'ffmpeg.exe'
+        else:
+            self.null = '/dev/null'
+            self.ffmpeg = 'ffmpeg'
 
     def fetchToken(self):
         res = requests.get(self.authurl + 'grant_type=client_credentials' + '&client_id=' + self.apikey + '&client_secret=' + self.secretkey)
@@ -48,11 +55,12 @@ class BaiduYuyin():
 
     def playMp3(self):
         try:
-            fb = open('/dev/null','r')
-            child = subprocess.Popen(['ffmpeg','-y', '-i', os.path.join(self.voicepath, 'voice.mp3'), os.path.join(self.voicepath, 'voice.wav')],stdout=fb, stderr=fb)
+            fb = open(self.null,'r')
+            child = subprocess.Popen([self.ffmpeg,'-y', '-i', os.path.join(self.voicepath, 'voice.mp3'), os.path.join(self.voicepath, 'voice.wav')],stdout=fb, stderr=fb)
             fb.close()
             child.wait()
         except Exception as e:
+            print('22222')
             print(e)
         else:
             psound = pygame.mixer.Sound(os.path.join(self.voicepath,'voice.wav'))
