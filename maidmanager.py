@@ -5,6 +5,9 @@ import subprocess
 import time
 import sqlite3
 from AImaid.core.model.main.model_maid import MaidM
+
+workpath = os.path.dirname(os.path.abspath(__file__))
+
 M = MaidM()
 if M.setBusy(False):
     print('initial status successfully')
@@ -15,7 +18,7 @@ else:
 
 def maidthread():
     M2 = MaidM()
-    child = subprocess.Popen(['python3','maid.py'])
+    child = subprocess.Popen(['python3',os.path.join(workpath,'maid.py')])
     time.sleep(1800)
     while True:
         if M2.getBusy() == False:

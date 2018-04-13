@@ -1,4 +1,4 @@
-from AImaid.core.message.selector import MessageSelector
+from AImaid.core.components.message.selector import MessageSelector
 
 class MainService():
     def __init__(self):
