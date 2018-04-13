@@ -3,7 +3,7 @@ import sqlite3, os
 class MessageQueueM():
     def __init__(self,conn=None):
         workpath = os.path.dirname(os.path.abspath(__file__))
-        dbpath = os.path.join(workpath,'../maid.db')
+        dbpath = os.path.join(workpath,'..','maid.db')
         if conn is None:
             self.conn = sqlite3.connect(dbpath)
         else:

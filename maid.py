@@ -1,21 +1,20 @@
-from AImaid.present.yuyin import *
-import random
-from AImaid.present.display import *
-from AImaid.chatbot.xiaobingchat import *
-from AImaid.chatbot.tulingbot import *
-from AImaid.action.mp3play.mp3controller import *
+from AImaid.expression import *
+import random, json, time
+from AImaid.strategy.chatbot import *
+#from AImaid.ability.skill.mp3play.mp3controller import *
+from AImaid.ability.skill import *
 from AImaid.core.model.main.model_maid import MaidM
 
 class Maid():
     def __init__(self):
         self.M = MaidM()
         self.songlist = []
-        self.mp3ctl = MP3Controller()
-        self.yuyin = BaiduYuyin()
-        self.dsp = Display(position='right_bottom')
+        self.mp3ctl = mp3play.mp3controller.MP3Controller()
+        self.yuyin = talk.yuyin.BaiduYuyin()
+        self.dsp = display.lookview.Display(position='right_bottom')
         self.dsp.runPlay()
-        #self.chatbot = XiaoBing()
-        self.chatbot = Tuling()
+        #self.chatbot = xiaobingchat.XiaoBing()
+        self.chatbot = tulingbot.Tuling()
         #idel things
         self.idle_emotion = 0
         self.idle_things = ['讲笑话','讲故事','歇后语','脑筋急转弯','绕口令','顺口溜','喵喵喵','谁是你主人', '你是谁']

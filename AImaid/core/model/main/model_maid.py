@@ -5,7 +5,7 @@ from .model_message_queue import MessageQueueM
 class MaidM():
     def __init__(self, conn=None):
         workpath = os.path.dirname(os.path.abspath(__file__))
-        dbpath = os.path.join(workpath,'../maid.db')
+        dbpath = os.path.join(workpath,'..','maid.db')
         if conn == None:
             self.conn = sqlite3.connect(dbpath)
         else:
