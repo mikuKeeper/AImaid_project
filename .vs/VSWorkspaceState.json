@@ -2,12 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\AImaid",
-    "\\AImaid\\core\\model\\ability",
+    "\\AImaid\\core",
+    "\\AImaid\\core\\model",
     "\\AImaid\\core\\model\\main",
     "\\AImaid\\expression",
-    "\\AImaid\\expression\\voice",
-    "\\AImaid\\expression\\voice\\tmp"
+    "\\AImaid\\expression\\display",
+    "\\AImaid\\expression\\display\\webview",
+    "\\AImaid\\expression\\display\\webview\\webapi",
+    "\\AImaid\\expression\\display\\webview\\webapi\\__pycache__"
   ],
-  "SelectedNode": "\\AImaid\\expression\\voice\\yuyin.py",
+  "SelectedNode": "\\AImaid\\expression\\display\\webview\\webapi\\live2d-view.py",
   "PreviewInSolutionExplorer": false
 }

@@ -69,7 +69,7 @@ print('###########################')
 
 #create base queue
 mqM = MessageQueueM(conn)
-base_queue_list = ['originalmessage', 'chatmessage','musiccmd','dianbo']
+base_queue_list = ['originalmessage', 'chatmessage','musiccmd','dianbo','talkmsg']
 for n in base_queue_list:
     mqM.createNewQueue(n)
 print('create queues finished')

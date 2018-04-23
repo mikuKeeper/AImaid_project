@@ -7,7 +7,8 @@ import sqlite3
 from AImaid.core.model.main.model_maid import MaidM
 import platform
 
-
+flask_env = os.environ.copy()
+flask_env['FLASK_APP'] = 'startweb.py'
 workpath = os.path.dirname(os.path.abspath(__file__))
 if platform.architecture()[1] == 'WindowsPE':
     py = 'python.exe'
@@ -35,6 +36,8 @@ def maidthread():
 def othersthread():
     sense = subprocess.Popen([py,os.path.join(workpath,'maid_sense.py')],creationflags =subprocess.CREATE_NEW_CONSOLE)
     mainservice = subprocess.Popen([py,os.path.join(workpath,'maid_mainservice.py')],creationflags =subprocess.CREATE_NEW_CONSOLE)
+    webservice = subprocess.Popen(['flask','run'],env=flask_env,creationflags =subprocess.CREATE_NEW_CONSOLE)
+
 
 
 thread_b = threading.Thread(target=othersthread)
